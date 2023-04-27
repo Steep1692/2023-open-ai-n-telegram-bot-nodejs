@@ -5,8 +5,8 @@
     "start:server:telegram": "node --experimental-modules index.ts --telegram",
     "dev:server": "nodemon --experimental-modules index.ts",
     "dev:server:telegram": "nodemon index.ts --telegram",
-    "build:client": "webpack --mode=production",
-    "dev:client": "webpack --watch --progress --mode=development"
+    "build-client-production": "webpack --mode=production",
+    "build-client-with-watching-for-changes": "webpack --watch --progress --mode=development"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
