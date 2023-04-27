@@ -1,0 +1,1 @@
+export const TELEGRAM_BOT_API_KEY: string = process.env.TELEGRAM_BOT_API_KEY

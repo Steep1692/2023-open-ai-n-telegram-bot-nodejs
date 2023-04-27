@@ -1,0 +1,1 @@
+export const SEND_INTERVAL_DEFAULT = 10_000
