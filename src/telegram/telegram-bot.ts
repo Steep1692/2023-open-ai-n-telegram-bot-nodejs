@@ -2,7 +2,7 @@ import TelegramBot = require('node-telegram-bot-api');
 import { TELEGRAM_BOT_API_KEY } from './config';
 import { makeAllWordsNotSend } from '../database';
 
-const mapChatIDToLastAction: Record<number, MessageCommands | null> = {};
+const mapChatIDToLastAction: Record<number, MessageCommands | undefined> = {};
 
 const cache_isRegisteredChatID: Record<number, boolean> = {};
 
@@ -43,16 +43,16 @@ const deleteChatMessages = async (bot: TelegramBot, chatID: number, lastMessageI
 };
 
 // Helper
-const stringIsNumber = value => isNaN(Number(value)) === false;
+const stringIsNumber = (value: any) => isNaN(Number(value)) === false;
 
 // Turn enum into array
-function enumToArray(enumme) {
+function enumToArray(enumme: any) {
   return Object.keys(enumme)
     .filter(stringIsNumber)
     .map(key => enumme[key]);
 }
 
-const isMessageTextAction = (text: string): boolean => {
+const isMessageTextAction = (text: string | undefined): boolean => {
   return enumToArray(MessageCommands).includes(text);
 };
 
@@ -67,6 +67,10 @@ export const initTelegramBot = ({
                                   onGetAllWords,
                                   onUpdateInterval,
                                 }: Options): TelegramBotInterface => {
+  if (!TELEGRAM_BOT_API_KEY) {
+    throw new Error('Telegram BOT API key is not provided: ' + JSON.stringify({ TELEGRAM_BOT_API_KEY }));
+  }
+
   const bot = new TelegramBot(TELEGRAM_BOT_API_KEY, { polling: true });
 
   const sendMenu = async (chatID: number) => {
@@ -151,15 +155,17 @@ export const initTelegramBot = ({
         }
       }
 
-      mapChatIDToLastAction[chatID] = null;
+      mapChatIDToLastAction[chatID] = undefined;
     } else {
       await deleteChatMessages(bot, chatID, messageID);
-
-
     }
   });
 
   bot.on('callback_query', async (msg) => {
+    if (!msg.message) {
+      return;
+    }
+
     const chatID: number = msg.message.chat.id;
     const message: string | undefined = msg.data;
 

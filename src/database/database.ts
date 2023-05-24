@@ -74,7 +74,7 @@ export const getRegisteredChatID = async (chatID: number): Promise<RegisteredCha
   })
 }
 
-export const createWordsCollection = (chatID) => {
+export const createWordsCollection = (chatID: number) => {
   return client.db().createCollection<Word>('words-' + chatID)
 }
 

@@ -57,8 +57,8 @@ const sendNextIfAvailable = async (chatID: number, sendTextMessage: (chatID: num
 };
 
 const startSendJobForChat = async (chatID: number, sendTextMessage: (chatID: number, text: string) => Promise<void>): Promise<void> => {
-  const lastTimeSend: LastTimeSend = await getLastTimeSendByChatID(chatID);
-  const sendInterval: SendInterval = await getSendInterval(chatID);
+  const lastTimeSend: LastTimeSend | null = await getLastTimeSendByChatID(chatID);
+  const sendInterval: SendInterval | null = await getSendInterval(chatID);
 
   const timestamp: number = Date.now();
   const timestampDelta: number = lastTimeSend
@@ -108,7 +108,7 @@ const main = async () => {
       const sent: number = await getWordsCollection(chatID).count({ sent: true })
       const sendInterval: SendInterval | null = await getSendInterval(chatID);
 
-      return `#Information\nSent: ${sent} expressions\nTotal: ${total} expressions\nInterval: ${Math.ceil((sendInterval.interval || SEND_INTERVAL_DEFAULT) / 1000)} minutes`
+      return `#Information\nSent: ${sent} expressions\nTotal: ${total} expressions\nInterval: ${Math.ceil((sendInterval?.interval || SEND_INTERVAL_DEFAULT) / 1000)} minutes`
     },
 
     onAddWord: async (chatID: number, message: string) => {
