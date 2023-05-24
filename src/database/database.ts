@@ -1,9 +1,9 @@
 import { Collection, DeleteResult, InsertOneResult, MongoClient, ObjectId, UpdateResult, WithId } from 'mongodb';
-import { DATA_BASE_NAME, DATA_BASE_PASSWORD } from './config';
+import { DATA_BASE_NAME, DATA_BASE_PASSWORD, DATA_BASE_USERNAME } from './config';
 import { LastTimeSend, RegisteredChat, SendInterval, Word } from './types';
 import { SEND_INTERVAL_DEFAULT } from '../config';
 
-const uri = "mongodb+srv://shopen1692:6nO666lIddDYlQ0u@cluster0.nd8vdg9.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://" + DATA_BASE_USERNAME + ":" + DATA_BASE_PASSWORD + "@cluster0.nd8vdg9.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 const getDataBase = () => {

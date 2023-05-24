@@ -1,0 +1,1 @@
+export const OPEN_AI_TOKEN: string = process.env.OPEN_AI_TOKEN

@@ -1,1 +1,0 @@
-export const OPEN_AI_TOKEN = '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'
