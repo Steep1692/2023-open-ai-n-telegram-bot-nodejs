@@ -1,3 +1,3 @@
 2023 year
 
-Telegram BOT
+Open AI Api + Telegram Bot Api + Cloud Mongo DB
