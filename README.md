@@ -1,5 +1,9 @@
-## 2023 year
+# The project wasn't refactored and pushed as a code sample.
 
-### The project wasn't refactored and pushed as a code sample.
+Two nights pet project.
 
-Fast pet project: Open AI Api + Telegram Bot Api + Cloud Mongo DB.
+### 🪛 Technologies:
+- Node.js
+- Open AI Api
+- Telegram Bot Api
+- Cloud Mongo DB
